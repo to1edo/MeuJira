@@ -8,7 +8,24 @@ export interface EntriesState{
 }
 const INITIAL_STATE:EntriesState = {
   entries:[
-
+    { 
+      _id: uuidv4(),
+      description:'Estudar para a prova de física',
+      createdAt:Date.now(),
+      status: 'pending'
+    },
+    { 
+      _id: uuidv4(),
+      description:'Fazer trabalhos de matemática',
+      createdAt:Date.now(),
+      status: 'in-progress'
+    },
+    { 
+      _id: uuidv4(),
+      description:'Estudar Biología',
+      createdAt:Date.now(),
+      status: 'finished'
+    }
   ]
 }
 
