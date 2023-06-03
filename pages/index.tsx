@@ -28,7 +28,7 @@ const HomePage: NextPage = () => {
               sx={{
                 flexGrow: "1",
                 display: "flex",
-                maxHeight: isAdding ? "63%" : "81%",
+                maxHeight: isAdding ? "68%" : "81%",
                 '@media (max-width: 899px)': {
                   maxHeight: isAdding ? "76%" : "85%",
                 },
