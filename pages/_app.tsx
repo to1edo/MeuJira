@@ -11,18 +11,18 @@ import Entriesprovider from '../context/entries/EntriesProvider';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <UIProvider>
-      
-      <Entriesprovider>
+    
+    <Entriesprovider>
+      <UIProvider>
 
         <ThemeProvider theme={ darkTheme }>
           <CssBaseline />
           <Component {...pageProps} />
         </ThemeProvider>
 
-      </Entriesprovider>
+      </UIProvider>
+    </Entriesprovider>
 
-    </UIProvider>
   )
 }
 

@@ -1,28 +1,31 @@
-import { UIState } from './';
+import { UIState } from "./";
 
+type UIActionType =
+  | { type: "UI - Open Sidebar" }
+  | { type: "UI - Close Sidebar" }
+  | { type: "UI - Change isDragging" }
 
-type UIActionType = 
-    | { type: 'UI - Open Sidebar' } 
-    | { type: 'UI - Close Sidebar' }
+export const uiReducer = (state: UIState, action: UIActionType): UIState => {
+  switch (action.type) {
+    case "UI - Open Sidebar":
+      return {
+        ...state,
+        sidemenuOpen: true,
+      };
 
+    case "UI - Close Sidebar":
+      return {
+        ...state,
+        sidemenuOpen: false,
+      };
 
-export const uiReducer = ( state: UIState, action: UIActionType ): UIState => {
+    case "UI - Change isDragging":
+      return {
+        ...state,
+        isDragging: !state.isDragging,
+      };
 
-   switch (action.type) {
-      case 'UI - Open Sidebar':
-         return {
-            ...state,
-            sidemenuOpen: true,
-          }
-
-      case 'UI - Close Sidebar':
-          return {
-            ...state,
-            sidemenuOpen: false,
-           }
-
-       default:
-          return state;
-   }
-
-}
+    default:
+      return state;
+  }
+};

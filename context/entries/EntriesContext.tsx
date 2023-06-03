@@ -1,8 +1,12 @@
 import {createContext} from 'react'
-import { Entry } from '../../interfaces'
+import { Entry, EntryStatus } from '../../interfaces'
 
 interface ContextProps{
-  entries:Entry[]
+  isAdding:boolean;
+  entries:Entry[];
+  toggleIsAdding:()=>void;
+  addEntry:(description:string)=>void,
+  changeEntryStatus:(id:string, status:EntryStatus['status'])=>void
 }
 
 export const EntriesContext = createContext({} as ContextProps)

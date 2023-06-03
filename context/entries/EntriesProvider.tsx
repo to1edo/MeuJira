@@ -1,12 +1,14 @@
 import { FC, ReactNode,useReducer } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { EntriesContext, entriesReducer } from './';
-import { Entry } from '../../interfaces';
+import { Entry, EntryStatus } from '../../interfaces';
 
 export interface EntriesState{
-  entries:Entry[]
+  isAdding: boolean;
+  entries:Entry[];
 }
 const INITIAL_STATE:EntriesState = {
+  isAdding: false,
   entries:[
     { 
       _id: uuidv4(),
@@ -37,9 +39,38 @@ const Entriesprovider:FC<Props> = ({children}) => {
 
   const [state, dispatch] = useReducer(entriesReducer, INITIAL_STATE)
 
+  const toggleIsAdding = ()=>{
+    dispatch({type: 'toggleIsAdding'})
+  }
+
+  const addEntry = (description:string)=>{
+
+    const payload:Entry={
+      _id: uuidv4(),
+      description,
+      createdAt: Date.now(),
+      status:'pending'
+    }
+    dispatch({type:'Add Entry',payload})
+  }
+
+  const changeEntryStatus = (id:string, status:EntryStatus['status'])=>{
+    const temp = state.entries.map( entry =>{
+      if(entry._id === id){
+        entry.status = status
+      }
+      return entry
+    })
+
+    dispatch({type:'Change Entry Status', payload:[...temp]})
+  }
+
   return (
     <EntriesContext.Provider value={{
-      ...state
+      ...state,
+      toggleIsAdding,
+      addEntry,
+      changeEntryStatus
     }}>
       {children}
     </EntriesContext.Provider>
