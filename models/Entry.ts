@@ -13,7 +13,7 @@ const entrySchema = new Schema({
     type: String,
     enum: ['pending', 'in-progress', 'finished'],
     message: 'Status must be pending, in-progress or finished',
-    required: true
+    default: 'pending'
   },
   createdAt: {
     type: Number,

@@ -22,11 +22,6 @@ export const seedData:seedObject = {
       status: "in-progress"
     },
     {
-      description: "Adipisicing duis amet cillum elit labore aute fugiat aute enim fugiat tempor.",
-      createdAt: 1685859347162,
-      status: "pending"
-    },
-    {
       description: "Sunt labore occaecat duis nostrud.",
       createdAt: 1685859347162,
       status: "pending"
