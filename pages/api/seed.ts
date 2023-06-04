@@ -1,5 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { db } from '../../database';
+import {EntryModel} from '../../models';
+import { seedData } from '../../database';
 
 type Data={
   message:string
@@ -15,7 +17,11 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
     return res.json({message: 'Method not allowed'})
   }
 
-  await db.conect()
+  await db.connect()
+
+  await EntryModel.deleteMany()
+  await EntryModel.insertMany(seedData.entries)
+
   await db.disconnect()
 
   res.status(200).json({message: 'OK'});

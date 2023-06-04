@@ -1,1 +1,1 @@
-import EntryModel from './Entry'
+export * from './Entry'
