@@ -21,4 +21,4 @@ const entrySchema = new Schema({
   }
 })
 
-export const EntryModel: Model<Ientry> = mongoose.models.EntryModel || mongoose.model('EntryModel', entrySchema)
+export const EntryModel: Model<Ientry> = mongoose.models.EntryModel || mongoose.model('Entry', entrySchema)
