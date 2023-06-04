@@ -19,3 +19,11 @@ __mongodb://localhost:27017/entriesdb__
 ### Configurar as variáveis ​​de ambiente
 __.env.template__ 
 
+<hr>
+
+### Preencha o banco de dados
+__http://localhost:3000/api/seed__
+
+
+
+

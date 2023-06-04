@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { db } from '../../database';
-import {EntryModel} from '../../models';
+import {EntryModel as Entry} from '../../models';
 import { seedData } from '../../database';
 
 type Data={
@@ -19,8 +19,8 @@ export default async function handler( req: NextApiRequest, res: NextApiResponse
 
   await db.connect()
 
-  await EntryModel.deleteMany()
-  await EntryModel.insertMany(seedData.entries)
+  await Entry.deleteMany()
+  await Entry.insertMany(seedData.entries)
 
   await db.disconnect()
 

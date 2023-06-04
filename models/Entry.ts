@@ -1,7 +1,7 @@
 import mongoose, {Schema,Model} from 'mongoose';
 import { Entry } from '../interfaces';
 
-interface Ientry extends Entry{
+export interface Ientry extends Entry{
 }
 
 const entrySchema = new Schema({
@@ -21,4 +21,4 @@ const entrySchema = new Schema({
   }
 })
 
-export const EntryModel: Model<Ientry> = mongoose.models.EntryModel || mongoose.model('Entry', entrySchema)
+export const EntryModel: Model<Ientry> = mongoose.models.Entry || mongoose.model('Entry', entrySchema)

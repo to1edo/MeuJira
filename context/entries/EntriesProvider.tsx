@@ -1,7 +1,8 @@
-import { FC, ReactNode,useReducer } from 'react';
+import { FC, ReactNode,useEffect,useReducer } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { EntriesContext, entriesReducer } from './';
 import { Entry, EntryStatus } from '../../interfaces';
+import {entriesApi} from '../../apis';
 
 export interface EntriesState{
   isAdding: boolean;
@@ -45,6 +46,19 @@ const Entriesprovider:FC<Props> = ({children}) => {
 
     dispatch({type:'Change Entry Status', payload:[...temp]})
   }
+
+  useEffect(()=>{
+    const getEntries= async () => {
+      try {
+        const {data} = await entriesApi.get<Entry[]>('/entries')
+        dispatch({type:'Load Entries',payload:data})
+      } catch (error) {
+        console.log('something went wrong')
+      }
+    }
+    getEntries()
+
+  },[])
 
   return (
     <EntriesContext.Provider value={{
