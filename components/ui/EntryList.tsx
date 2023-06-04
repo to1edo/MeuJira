@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const EntryList: FC<Props> = ({ status }) => {
-  const { entries, changeEntryStatus } = useContext(EntriesContext);
+  const { entries, updateEntry } = useContext(EntriesContext);
   const { changeIsDragging, isDragging } = useContext(UIContext);
 
   const [dragginOver,setDragginOver] = useState(false)
@@ -20,7 +20,10 @@ export const EntryList: FC<Props> = ({ status }) => {
   const onDrop = (e: DragEvent<HTMLDivElement>) => {
     const id = e.dataTransfer.getData("id");
 
-    changeEntryStatus(id, status);
+    const entry = entries.find((entry) => entry._id === id)!;
+    entry.status = status;
+    updateEntry(entry);
+
     changeIsDragging();
     setDragginOver(false)
   };

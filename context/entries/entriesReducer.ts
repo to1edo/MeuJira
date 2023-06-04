@@ -4,8 +4,8 @@ import { Entry } from '../../interfaces';
 type EntriesActionType =
 { type:'toggleIsAdding' }|
 { type:'Add Entry', payload:Entry}|
-{ type:'Change Entry Status', payload:Entry[]}|
-{ type:'Load Entries', payload:Entry[]}
+{ type:'Load Entries', payload:Entry[]}|
+{ type:'Update Entry', payload:Entry[]}
 
 export const entriesReducer = (state: EntriesState, action: EntriesActionType)=>{
 
@@ -22,7 +22,7 @@ export const entriesReducer = (state: EntriesState, action: EntriesActionType)=>
       entries: [...state.entries,action.payload]
     }
 
-    case 'Change Entry Status':
+    case 'Update Entry':
       return{
         ...state,
         entries: action.payload

@@ -15,7 +15,6 @@ export default function handler(req:NextApiRequest, res:NextApiResponse<Data>) {
     case 'GET': 
       return getEntries(res);
 
-
     case 'POST': 
       return addEntry(req.body.description, res);
 
@@ -34,7 +33,7 @@ const getEntries = async (res:NextApiResponse<Data>) => {
 }
 
 const addEntry = async ( description:string ,res:NextApiResponse<Data>) => {
- 
+
   try {
 
     await db.connect()

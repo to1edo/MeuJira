@@ -1,6 +1,6 @@
 import { FC, ReactNode,useEffect,useReducer } from 'react';
 import { EntriesContext, entriesReducer } from './';
-import { Entry, EntryStatus } from '../../interfaces';
+import { Entry } from '../../interfaces';
 import {entriesApi} from '../../apis';
 
 export interface EntriesState{
@@ -34,15 +34,23 @@ const Entriesprovider:FC<Props> = ({children}) => {
     }
   }
 
-  const changeEntryStatus = (id:string, status:EntryStatus['status'])=>{
-    const temp = state.entries.map( entry =>{
-      if(entry._id === id){
-        entry.status = status
-      }
-      return entry
-    })
+  const updateEntry = async({_id, description, status}:Entry)=>{
+    
+    try {
+      const {data} = await entriesApi.put(`/entries/${_id}`,{description, status})
+      
+      const temp = state.entries.map( entry =>{
+        if(entry._id === data._id){
+          return data
+        }
+        return entry
+      })
 
-    dispatch({type:'Change Entry Status', payload:[...temp]})
+      dispatch({type:'Update Entry', payload:[...temp]})
+      
+    } catch (error) {
+      console.log('something went wrong')
+    }
   }
 
   useEffect(()=>{
@@ -63,7 +71,7 @@ const Entriesprovider:FC<Props> = ({children}) => {
       ...state,
       toggleIsAdding,
       addEntry,
-      changeEntryStatus
+      updateEntry
     }}>
       {children}
     </EntriesContext.Provider>
