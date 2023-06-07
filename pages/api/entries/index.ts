@@ -38,7 +38,7 @@ const addEntry = async ( description:string ,res:NextApiResponse<Data>) => {
 
     await db.connect()
     const result = await Entry.create({description})
-    console.log(result)
+    // console.log(result)
     return res.status(201).json(result)
 
   } catch (error) {
