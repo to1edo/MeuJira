@@ -7,6 +7,7 @@ interface ContextProps{
   toggleIsAdding:()=>void;
   addEntry:(description:string)=>void,
   updateEntry:(entry:Entry)=>void
+  deleteEntry:(id:string)=>void
 }
 
 export const EntriesContext = createContext({} as ContextProps)

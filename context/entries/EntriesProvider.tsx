@@ -2,7 +2,7 @@ import { FC, ReactNode,useEffect,useReducer } from 'react';
 import { EntriesContext, entriesReducer } from './';
 import { Entry } from '../../interfaces';
 import {entriesApi} from '../../apis';
-
+import cogoToast from 'cogo-toast';
 export interface EntriesState{
   isAdding: boolean;
   entries:Entry[];
@@ -46,10 +46,24 @@ const Entriesprovider:FC<Props> = ({children}) => {
         return entry
       })
 
-      dispatch({type:'Update Entry', payload:[...temp]})
-      
+      dispatch({type:'Update Entries', payload:[...temp]})
+      cogoToast.success('As alterações foram salvas');
+
     } catch (error) {
-      console.log('something went wrong')
+      cogoToast.error('Erro ao salvar as alterações');
+    }
+  }
+
+  const deleteEntry = async(id:string)=>{
+    try {
+      await entriesApi.delete(`/entries/${id}`)
+
+      const temp = state.entries.filter( entry => entry._id !== id)
+      dispatch({type:'Update Entries', payload:[...temp]})
+      cogoToast.success('As tarefa foi excluída');
+
+    } catch (error) {
+      cogoToast.error('Erro ao excluir a tarefa');
     }
   }
 
@@ -71,7 +85,8 @@ const Entriesprovider:FC<Props> = ({children}) => {
       ...state,
       toggleIsAdding,
       addEntry,
-      updateEntry
+      updateEntry,
+      deleteEntry
     }}>
       {children}
     </EntriesContext.Provider>

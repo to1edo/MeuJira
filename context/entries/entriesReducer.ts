@@ -5,7 +5,8 @@ type EntriesActionType =
 { type:'toggleIsAdding' }|
 { type:'Add Entry', payload:Entry}|
 { type:'Load Entries', payload:Entry[]}|
-{ type:'Update Entry', payload:Entry[]}
+{ type:'Update Entries', payload:Entry[]}|
+{ type:'Delete Entry', payload:Entry[]}
 
 export const entriesReducer = (state: EntriesState, action: EntriesActionType)=>{
 
@@ -22,7 +23,7 @@ export const entriesReducer = (state: EntriesState, action: EntriesActionType)=>
       entries: [...state.entries,action.payload]
     }
 
-    case 'Update Entry':
+    case 'Update Entries':
       return{
         ...state,
         entries: action.payload

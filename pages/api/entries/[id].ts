@@ -22,6 +22,9 @@ export default function handler(req:NextApiRequest, res:NextApiResponse) {
 
     case 'GET':
       return getEntry(req, res);
+
+    case 'DELETE':
+      return deleteEntry(req, res);
   
     default:
       return res.status(405).end(`Method ${req.method} Not Allowed`);
@@ -73,6 +76,25 @@ const getEntry = async (req:NextApiRequest, res:NextApiResponse<Data>) => {
     }
     
     return res.status(200).json(entry!);
+
+  } catch (error) {
+
+    console.log(error)
+    return res.status(500).json({message: 'server error'})
+
+  }finally{
+    await db.disconnect()
+  }
+}
+
+const deleteEntry = async(req:NextApiRequest, res:NextApiResponse<Data>) => {
+  const { id } = req.query;
+
+  try {
+
+    await db.connect();
+    await Entry.deleteOne({ _id: id });
+    return res.status(200).json({message: 'Entry deleted'});
 
   } catch (error) {
 

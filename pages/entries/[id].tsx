@@ -1,4 +1,5 @@
 import { useState, ChangeEvent, FC, useContext } from "react";
+import { useRouter } from "next/router";
 import { GetServerSideProps } from "next";
 
 import {
@@ -25,7 +26,6 @@ import { Entry, EntryStatus } from "../../interfaces";
 import { isValidObjectId } from "mongoose";
 import { entriesApi } from "../../apis";
 import { EntriesContext } from "../../context/entries";
-import cogoToast from 'cogo-toast';
 import formatTime from "../../utils/dateConvert";
 
 interface Props{
@@ -33,7 +33,8 @@ interface Props{
 }
 const Entries:FC<Props> = ({entry}) => {
 
-  const {updateEntry} = useContext(EntriesContext)
+  const {updateEntry, deleteEntry} = useContext(EntriesContext)
+  const router = useRouter();
 
   const [inputValue, setInputValue] = useState(entry?.description || '');
   const [status, setStatus] = useState<EntryStatus['status']>(entry?.status || 'pending')
@@ -58,11 +59,13 @@ const Entries:FC<Props> = ({entry}) => {
     })
 
     setTouched(false)
-    cogoToast.success('As alterações foram salvas');
   }
 
   const onDelete = ()=>{
-
+    if(confirm('¿Deseja deletar esta tarefa?')){
+      deleteEntry(entry?._id!)
+      router.replace('/')
+    }  
   }
 
   return (
