@@ -40,18 +40,21 @@ const Entriesprovider:FC<Props> = ({children}) => {
 
   const updateEntry = async({_id, description, status}:Entry)=>{
     
-    try {
-      const {data} = await entriesApi.put(`/entries/${_id}`,{description, status})
-      
-      const temp = state.entries.map( entry =>{
-        if(entry._id === data._id){
-          return data
+    const temp = state.entries.map( entry =>{
+      if(entry._id === _id){
+        return {
+          ...entry,
+          description,
+          status
         }
-        return entry
-      })
+      }
+      return entry
+    })
+    dispatch({type:'Update Entries', payload:[...temp]})
 
-      dispatch({type:'Update Entries', payload:[...temp]})
-
+    try {
+      await entriesApi.put(`/entries/${_id}`,{description, status})
+      
     } catch (error) {
       toast.error('Erro ao salvar as alterações');
     }
