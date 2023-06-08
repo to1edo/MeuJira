@@ -47,7 +47,6 @@ const Entriesprovider:FC<Props> = ({children}) => {
       })
 
       dispatch({type:'Update Entries', payload:[...temp]})
-      cogoToast.success('As alterações foram salvas');
 
     } catch (error) {
       cogoToast.error('Erro ao salvar as alterações');

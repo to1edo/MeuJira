@@ -1,13 +1,10 @@
 import { useContext } from 'react';
-import { Box, Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, Typography } from '@mui/material';
+import { Box, Drawer, List, ListItem, ListItemIcon, ListItemText, Typography } from '@mui/material';
 
-
-import InboxOutlinedIcon from '@mui/icons-material/InboxOutlined';
-import MailOutlineOutlinedIcon from '@mui/icons-material/MailOutlineOutlined';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 
 import { UIContext } from '../../context/ui';
 
-const menuItems: string[] = ['Inbox','Starred','Send Email','Drafts']
 
 
 export const Sidebar = () => {
@@ -28,31 +25,12 @@ export const Sidebar = () => {
                 </Box>
 
                 <List>
-                    {
-                        menuItems.map( (text, index) => (
-                            <ListItem button key={ text }>
-                                <ListItemIcon>
-                                    { index % 2 ? <InboxOutlinedIcon />: <MailOutlineOutlinedIcon />  }
-                                </ListItemIcon>
-                                <ListItemText primary={ text } />
-                            </ListItem>
-                        ))
-                    }
-                </List>
-
-                <Divider />
-
-                <List>
-                    {
-                        menuItems.map( (text, index) => (
-                            <ListItem button key={ text }>
-                                <ListItemIcon>
-                                    { index % 2 ? <InboxOutlinedIcon />: <MailOutlineOutlinedIcon />  }
-                                </ListItemIcon>
-                                <ListItemText primary={ text } />
-                            </ListItem>
-                        ))
-                    }
+                    <ListItem button>
+                        <ListItemIcon>
+                            <HomeOutlinedIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary={'Inicio'} />
+                    </ListItem>
                 </List>
 
             </Box>

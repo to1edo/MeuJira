@@ -27,7 +27,7 @@ import { isValidObjectId } from "mongoose";
 import { entriesApi } from "../../apis";
 import { EntriesContext } from "../../context/entries";
 import formatTime from "../../utils/dateConvert";
-
+import cogoToast from "cogo-toast";
 interface Props{
   entry:Entry | null;
 }
@@ -57,7 +57,7 @@ const Entries:FC<Props> = ({entry}) => {
       description: inputValue,
       status
     })
-
+    cogoToast.success('As alterações foram salvas');
     setTouched(false)
   }
 

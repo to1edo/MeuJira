@@ -29,12 +29,12 @@ export const EntryCard:FC<Props> = ({entry}) => {
       onClick={()=> router.push(`/entries/${entry._id}`) }
     >
       <CardActionArea  sx={{cursor:'grab'}}>
-        <CardContent>
-          <Typography sx={{whiteSpace:'pre-line'}}>{entry.description}</Typography>
+        <CardContent sx={{padding:'10px'}}>
+          <Typography sx={{whiteSpace:'pre-line', fontSize:'0.8rem'}}>{entry.description}</Typography>
         </CardContent>
 
-        <CardActions>
-          <Typography sx={{textAlign:'right', width:'100%', fontSize:'0.9rem' , color:'#949494'}}>{formatTime(entry.createdAt)}</Typography>
+        <CardActions sx={{padding:'0 20px 10px 0'}}>
+          <Typography sx={{textAlign:'right', width:'100%', fontSize:'0.8rem' , color:'#949494'}}>{formatTime(entry.createdAt)}</Typography>
         </CardActions>
       </CardActionArea>
     </Card>
