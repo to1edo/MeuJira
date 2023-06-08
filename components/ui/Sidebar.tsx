@@ -4,6 +4,7 @@ import { Box, Drawer, List, ListItem, ListItemIcon, ListItemText, Typography } f
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 
 import { UIContext } from '../../context/ui';
+import Link from 'next/link';
 
 
 
@@ -25,12 +26,14 @@ export const Sidebar = () => {
                 </Box>
 
                 <List>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <HomeOutlinedIcon/>
-                        </ListItemIcon>
-                        <ListItemText primary={'Inicio'} />
-                    </ListItem>
+                    <Link href="/">
+                        <ListItem button>
+                            <ListItemIcon>
+                                <HomeOutlinedIcon/>
+                            </ListItemIcon>
+                            <ListItemText primary={'Inicio'} sx={{textDecoration: 'none', color: 'white'}} />
+                        </ListItem>
+                    </Link>
                 </List>
 
             </Box>
