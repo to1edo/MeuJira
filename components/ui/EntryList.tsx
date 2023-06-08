@@ -4,13 +4,14 @@ import { EntriesContext } from "../../context/entries";
 import { EntryCard } from "./";
 import { List, Paper } from "@mui/material";
 import { UIContext } from "../../context/ui";
+import Spinner from './Spinner';
 
 interface Props {
   status: EntryStatus["status"];
 }
 
 export const EntryList: FC<Props> = ({ status }) => {
-  const { entries, updateEntry } = useContext(EntriesContext);
+  const { entries, updateEntry, isFetching } = useContext(EntriesContext);
   const { changeIsDragging, isDragging } = useContext(UIContext);
 
   const [dragginOver,setDragginOver] = useState(false)
@@ -53,9 +54,17 @@ export const EntryList: FC<Props> = ({ status }) => {
           }}
           
         >
-            {filterEntries.map((entry) => (
-              <EntryCard key={entry._id} entry={entry} />
-            ))}
+          {
+            isFetching ?
+            (
+              <Spinner/>
+            ):
+            (
+              filterEntries.map((entry) => (
+                <EntryCard key={entry._id} entry={entry} />
+              ))
+            )
+          }
         </List>
       </Paper>
     </div>

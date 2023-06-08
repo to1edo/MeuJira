@@ -6,7 +6,8 @@ type EntriesActionType =
 { type:'Add Entry', payload:Entry}|
 { type:'Load Entries', payload:Entry[]}|
 { type:'Update Entries', payload:Entry[]}|
-{ type:'Delete Entry', payload:Entry[]}
+{ type:'Delete Entry', payload:Entry[]} |
+{ type: "Toggle isFetching" }
 
 export const entriesReducer = (state: EntriesState, action: EntriesActionType)=>{
 
@@ -34,6 +35,12 @@ export const entriesReducer = (state: EntriesState, action: EntriesActionType)=>
         ...state,
         entries: action.payload
       }
+
+      case "Toggle isFetching":
+        return {
+          ...state,
+          isFetching: !state.isFetching,
+        }
 
     default:
       return state

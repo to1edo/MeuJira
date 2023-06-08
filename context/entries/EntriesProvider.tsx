@@ -1,14 +1,17 @@
-import { FC, ReactNode,useEffect,useReducer } from 'react';
+import { FC, ReactNode,useContext,useEffect,useReducer } from 'react';
 import { EntriesContext, entriesReducer } from './';
 import { Entry } from '../../interfaces';
 import {entriesApi} from '../../apis';
 import {toast} from 'react-toastify';
+import { UIContext } from '../ui';
 export interface EntriesState{
   isAdding: boolean;
+  isFetching:boolean;
   entries:Entry[];
 }
 const INITIAL_STATE:EntriesState = {
   isAdding: false,
+  isFetching: false,
   entries:[]
 }
 
@@ -67,14 +70,19 @@ const Entriesprovider:FC<Props> = ({children}) => {
     }
   }
 
+  const toogleIsFetching = () => dispatch({ type: 'Toggle isFetching' })
+
   useEffect(()=>{
     const getEntries= async () => {
+      toogleIsFetching()
       try {
         const {data} = await entriesApi.get<Entry[]>('/entries')
         dispatch({type:'Load Entries',payload:data})
+        toogleIsFetching()
       } catch (error) {
-
+        
       }
+  
     }
     getEntries()
 
@@ -86,7 +94,8 @@ const Entriesprovider:FC<Props> = ({children}) => {
       toggleIsAdding,
       addEntry,
       updateEntry,
-      deleteEntry
+      deleteEntry,
+      toogleIsFetching
     }}>
       {children}
     </EntriesContext.Provider>
