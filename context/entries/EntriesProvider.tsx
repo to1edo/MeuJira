@@ -59,7 +59,7 @@ const Entriesprovider:FC<Props> = ({children}) => {
         const {data} = await entriesApi.get<Entry[]>('/entries')
         dispatch({type:'Load Entries',payload:data})
       } catch (error) {
-        console.log('something went wrong')
+
       }
     }
     getEntries()

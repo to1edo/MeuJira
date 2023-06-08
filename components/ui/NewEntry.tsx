@@ -4,6 +4,7 @@ import { EntriesContext } from '../../context/entries';
 import { Button, Box, TextField } from '@mui/material';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
+import cogoToast from 'cogo-toast';
 
 export const NewEntry = () => {
 
@@ -28,6 +29,7 @@ export const NewEntry = () => {
     setInputValue('')
     setTouched(false)
     toggleIsAdding()
+    cogoToast.success('Criado com sucesso');
   }
 
   return (
