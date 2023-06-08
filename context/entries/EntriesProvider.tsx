@@ -2,7 +2,7 @@ import { FC, ReactNode,useEffect,useReducer } from 'react';
 import { EntriesContext, entriesReducer } from './';
 import { Entry } from '../../interfaces';
 import {entriesApi} from '../../apis';
-import cogoToast from 'cogo-toast';
+import {toast} from 'react-toastify';
 export interface EntriesState{
   isAdding: boolean;
   entries:Entry[];
@@ -29,8 +29,9 @@ const Entriesprovider:FC<Props> = ({children}) => {
     try {
       const {data} = await entriesApi.post<Entry>('/entries',{description})
       dispatch({type:'Add Entry',payload:data})
+      toast.success('Criado com sucesso')
     } catch (error) {
-      
+      toast.error('Erro ao salvar a tarefa');
     }
   }
 
@@ -49,7 +50,7 @@ const Entriesprovider:FC<Props> = ({children}) => {
       dispatch({type:'Update Entries', payload:[...temp]})
 
     } catch (error) {
-      cogoToast.error('Erro ao salvar as alterações');
+      toast.error('Erro ao salvar as alterações');
     }
   }
 
@@ -59,10 +60,10 @@ const Entriesprovider:FC<Props> = ({children}) => {
 
       const temp = state.entries.filter( entry => entry._id !== id)
       dispatch({type:'Update Entries', payload:[...temp]})
-      cogoToast.success('As tarefa foi excluída');
+      toast.success('As tarefa foi excluída',{autoClose:1000});
 
     } catch (error) {
-      cogoToast.error('Erro ao excluir a tarefa');
+      toast.error('Erro ao excluir a tarefa',{autoClose:1000});
     }
   }
 

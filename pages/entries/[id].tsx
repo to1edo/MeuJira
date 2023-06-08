@@ -27,7 +27,7 @@ import { isValidObjectId } from "mongoose";
 import { entriesApi } from "../../apis";
 import { EntriesContext } from "../../context/entries";
 import formatTime from "../../utils/dateConvert";
-import cogoToast from "cogo-toast";
+import { toast } from "react-toastify";
 interface Props{
   entry:Entry | null;
 }
@@ -57,14 +57,17 @@ const Entries:FC<Props> = ({entry}) => {
       description: inputValue,
       status
     })
-    cogoToast.success('As alterações foram salvas');
+    toast.success('As alterações foram salvas');
     setTouched(false)
   }
 
   const onDelete = ()=>{
     if(confirm('¿Deseja deletar esta tarefa?')){
       deleteEntry(entry?._id!)
-      router.replace('/')
+
+      setTimeout(()=>{
+        router.replace('/')
+      },2000)
     }  
   }
 
